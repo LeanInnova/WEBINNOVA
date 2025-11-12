@@ -1,0 +1,31 @@
+{
+  "name": "innovaciones-informaticas-website",
+  "version": "1.0.0",
+  "description": "Sitio web profesional para Innovaciones Informáticas",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=8000",
+    "build": "echo 'Sitio web listo para producción'",
+    "deploy": "echo 'Configurar despliegue según hosting'"
+  },
+  "keywords": [
+    "informatica",
+    "servicios",
+    "soporte-tecnico",
+    "reparacion",
+    "redes",
+    "servidores"
+  ],
+  "author": "Innovaciones Informáticas",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innovaciones-informaticas/website.git"
+  },
+  "homepage": "https://innovacionesinformaticas.com"
+} 
