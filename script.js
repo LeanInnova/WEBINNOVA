@@ -336,44 +336,54 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!el || !wrapper) return;
     // asegurar clase que nuestras reglas CSS esperan
     wrapper.classList.add('subtitle-reveal');
-
-    // Soportamos múltiples frases por si queremos ampliar el carrusel
+    // Modern typing (letter-by-letter) loop
     const phrases = [
         'Vos soñalo, nosotros lo hacemos realidad'
     ];
 
+    const typeSpeed = 45; // ms por carácter
+    const deleteSpeed = 30; // ms por carácter al borrar
+    const pauseAfter = 1600; // ms después de escribir antes de borrar
+
     let idx = 0;
-    const enterDur = 850; // coincide con CSS transition para reveal
-    const displayDur = 2200; // tiempo visible
-    const exitDur = 600; // duración de salida
 
-    function showNext() {
-        const phrase = phrases[idx];
+    function sleep(ms) { return new Promise(res => setTimeout(res, ms)); }
 
-        // insertar estructura necesaria para reveal dentro del contenedor
-        wrapper.innerHTML = `<span class="reveal-text">${phrase}</span>`;
-        wrapper.classList.remove('reveal-exit');
-        // forzar reflow
-        void wrapper.offsetWidth;
-        // activar la animación de reveal (scaleX)
-        wrapper.classList.add('reveal-active');
-
-        // después de la entrada, esperar displayDur, luego ejecutar salida
-        setTimeout(() => {
-            // iniciar salida
-            wrapper.classList.remove('reveal-active');
-            wrapper.classList.add('reveal-exit');
-
-            // después de exitDur, avanzar al siguiente
-            setTimeout(() => {
-                idx = (idx + 1) % phrases.length;
-                showNext();
-            }, exitDur);
-        }, enterDur + displayDur);
+    async function typePhrase(phrase) {
+        wrapper.innerHTML = '';
+        for (let i = 0; i < phrase.length; i++) {
+            const ch = document.createElement('span');
+            ch.className = 'char';
+            ch.textContent = phrase[i];
+            wrapper.appendChild(ch);
+            // trigger transition
+            requestAnimationFrame(() => ch.classList.add('visible'));
+            await sleep(typeSpeed + Math.round(Math.random() * 20));
+        }
     }
 
-    // iniciar con pequeña demora
-    setTimeout(showNext, 400);
+    async function deletePhrase() {
+        const chars = Array.from(wrapper.querySelectorAll('.char'));
+        for (let i = chars.length - 1; i >= 0; i--) {
+            const ch = chars[i];
+            ch.classList.remove('visible');
+            await sleep(deleteSpeed);
+            if (ch.parentNode) ch.parentNode.removeChild(ch);
+        }
+    }
+
+    async function loop() {
+        while (true) {
+            const phrase = phrases[idx];
+            await typePhrase(phrase);
+            await sleep(pauseAfter);
+            await deletePhrase();
+            idx = (idx + 1) % phrases.length;
+            await sleep(300);
+        }
+    }
+
+    setTimeout(loop, 400);
 });
 
 // Funcionalidad para formulario avanzado
