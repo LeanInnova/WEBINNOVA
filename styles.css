@@ -216,20 +216,17 @@ body {
 /* Subtítulo ubicado cerca de la base de la barra */
 .logo-subtitle {
     position: absolute;
-    left: 150px; /* desplaza a la derecha del logo (ajustable) */
-    bottom: 8px; /* cerca de la base de la barra */
+    left: 0; /* alineado al inicio del texto del logo */
+    top: calc(100% + 8px); /* coloca justo debajo del logo-text */
     font-family: 'Orbitron', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
+    font-size: 1.35rem; /* un poco más grande */
+    font-weight: 800;
+    letter-spacing: 0.6px;
     white-space: nowrap;
-    z-index: 3;
+    z-index: 30;
     pointer-events: none;
-    background: linear-gradient(90deg, #60a5fa 0%, #06b6d4 50%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 18px rgba(59,130,246,0.12);
+    color: #ffffff; /* color sólido para máxima legibilidad */
+    text-shadow: 0 6px 20px rgba(0,0,0,0.45), 0 2px 8px rgba(59,130,246,0.08);
 }
 
 .typing-cursor {
