@@ -217,7 +217,7 @@ body {
 .logo-subtitle {
     position: absolute;
     left: 0; /* alineado al inicio del texto del logo */
-    top: calc(100% + 20px); /* coloca más abajo, cerca de la base de la barra */
+    top: calc(100% + 34px); /* coloca más abajo, más cerca de la base de la barra */
     font-family: 'Orbitron', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     font-size: 1.45rem; /* más grande y llamativo */
     font-weight: 800;
@@ -226,7 +226,10 @@ body {
     z-index: 30;
     pointer-events: none;
     color: #ffffff; /* color sólido para máxima legibilidad */
-    text-shadow: 0 8px 28px rgba(0,0,0,0.5), 0 2px 10px rgba(59,130,246,0.08);
+    text-shadow: 0 10px 30px rgba(0,0,0,0.55), 0 2px 10px rgba(59,130,246,0.08);
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 
 .typing-cursor {
@@ -295,6 +298,11 @@ body {
 .logo-subtitle .char.visible {
     opacity: 1;
     transform: translateY(0) scaleY(1);
+}
+
+.logo-subtitle .char.space {
+    display: inline-block;
+    width: 0.45em; /* espacio visible entre palabras */
 }
 
 @keyframes blink {

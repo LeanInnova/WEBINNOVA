@@ -341,9 +341,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'Vos soñalo, nosotros lo hacemos realidad'
     ];
 
-    const typeSpeed = 45; // ms por carácter
-    const deleteSpeed = 30; // ms por carácter al borrar
-    const pauseAfter = 1600; // ms después de escribir antes de borrar
+    const typeSpeed = 75; // ms por carácter (más lento)
+    const deleteSpeed = 45; // ms por carácter al borrar
+    const pauseAfter = 2200; // ms después de escribir antes de borrar
 
     let idx = 0;
 
@@ -353,8 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.innerHTML = '';
         for (let i = 0; i < phrase.length; i++) {
             const ch = document.createElement('span');
-            ch.className = 'char';
-            ch.textContent = phrase[i];
+            // tratar espacios de manera explícita para asegurar separación
+            if (phrase[i] === ' ') {
+                ch.className = 'char space';
+                ch.textContent = '\u00A0';
+            } else {
+                ch.className = 'char';
+                ch.textContent = phrase[i];
+            }
             wrapper.appendChild(ch);
             // trigger transition
             requestAnimationFrame(() => ch.classList.add('visible'));
