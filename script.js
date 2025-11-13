@@ -340,29 +340,33 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let idx = 0;
-    const enterDur = 700; // debe coincidir con CSS
+    const enterDur = 850; // coincide con CSS transition para reveal
     const displayDur = 2200; // tiempo visible
-    const exitDur = 600;
+    const exitDur = 600; // duración de salida
 
     function showNext() {
-        // preparar texto
-        el.textContent = phrases[idx];
-        el.classList.remove('subtitle-exit');
-        void el.offsetWidth; // reflow para reiniciar animación si es necesario
-        el.classList.add('subtitle-enter');
+        const phrase = phrases[idx];
 
-        // después de mostrar, esperar y retirar
+        // insertar estructura necesaria para reveal
+        el.innerHTML = `<span class="reveal-text">${phrase}</span>`;
+        el.classList.remove('reveal-exit');
+        // forzar reflow
+        void el.offsetWidth;
+        // activar la animación de reveal (scaleX)
+        el.classList.add('reveal-active');
+
+        // después de la entrada, esperar displayDur, luego ejecutar salida
         setTimeout(() => {
-            el.classList.remove('subtitle-enter');
-            // mantener visible durante displayDur
+            // iniciar salida
+            el.classList.remove('reveal-active');
+            el.classList.add('reveal-exit');
+
+            // después de exitDur, avanzar al siguiente
             setTimeout(() => {
-                el.classList.add('subtitle-exit');
-                setTimeout(() => {
-                    idx = (idx + 1) % phrases.length;
-                    showNext();
-                }, exitDur);
-            }, displayDur);
-        }, enterDur);
+                idx = (idx + 1) % phrases.length;
+                showNext();
+            }, exitDur);
+        }, enterDur + displayDur);
     }
 
     // iniciar con pequeña demora

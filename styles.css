@@ -252,6 +252,37 @@ body {
     100% { opacity: 0; transform: translateY(-8px); }
 }
 
+/* Reveal moderno: aparición tipo "escritura" suave (scaleX) */
+.subtitle-reveal {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+}
+
+.subtitle-reveal .reveal-text {
+    display: inline-block;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 850ms cubic-bezier(0.22, 1, 0.36, 1), text-shadow 500ms ease;
+    will-change: transform;
+    white-space: nowrap;
+}
+
+.subtitle-reveal.reveal-active .reveal-text {
+    transform: scaleX(1);
+    text-shadow: 0 8px 30px rgba(59,130,246,0.18), 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.subtitle-reveal.reveal-exit .reveal-text {
+    transform: scaleX(0);
+    transition-duration: 600ms;
+}
+
+/* Ajustes finos: suavizar el paso entre frases */
+.subtitle-reveal .reveal-text {
+    transform-origin: left;
+}
+
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
