@@ -216,7 +216,8 @@ body {
 /* Subtítulo ubicado cerca de la base de la barra */
 .logo-subtitle {
     position: absolute;
-    left: 0; /* alineado al inicio del texto del logo */
+    left: 50%; /* centrar horizontalmente bajo el logo */
+    transform: translateX(-50%);
     top: calc(100% + 56px); /* colocado aún más abajo, cerca de la base de la barra */
     font-family: 'Orbitron', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     font-size: 1.45rem; /* más grande y llamativo */
