@@ -329,51 +329,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }); 
 
-// Efecto máquina de escribir (loop) para subtítulo del logo
+// Efecto carrusel moderno (loop) para subtítulo del logo
 document.addEventListener('DOMContentLoaded', () => {
-    const typingEl = document.getElementById('typing-text');
-    const cursorEl = document.querySelector('.typing-cursor');
-    const text = 'Vos soñalo, nosotros lo hacemos realidad';
-    const typeSpeed = 45; // ms por carácter al escribir
-    const deleteSpeed = 30; // ms por carácter al borrar
-    const pauseAfter = 1600; // ms después de escribir antes de borrar
+    const el = document.getElementById('typing-text');
+    if (!el) return;
 
-    if (!typingEl) return;
+    // Soportamos múltiples frases por si queremos ampliar el carrusel
+    const phrases = [
+        'Vos soñalo, nosotros lo hacemos realidad'
+    ];
 
-    let index = 0;
-    let isDeleting = false;
+    let idx = 0;
+    const enterDur = 700; // debe coincidir con CSS
+    const displayDur = 2200; // tiempo visible
+    const exitDur = 600;
 
-    function tick() {
-        if (!typingEl) return;
-        if (isDeleting) {
-            typingEl.textContent = text.substring(0, index - 1);
-            index--;
-        } else {
-            typingEl.textContent = text.substring(0, index + 1);
-            index++;
-        }
+    function showNext() {
+        // preparar texto
+        el.textContent = phrases[idx];
+        el.classList.remove('subtitle-exit');
+        void el.offsetWidth; // reflow para reiniciar animación si es necesario
+        el.classList.add('subtitle-enter');
 
-        // velocidad variable
-        let timeout = isDeleting ? deleteSpeed : typeSpeed;
-
-        if (!isDeleting && index === text.length) {
-            // espera antes de borrar
-            timeout = pauseAfter;
-            isDeleting = true;
-        } else if (isDeleting && index === 0) {
-            // espera antes de volver a escribir
-            isDeleting = false;
-            timeout = 600;
-        }
-
-        // mantener cursor parpadeando
-        if (cursorEl) cursorEl.style.animation = 'blink 1s steps(2) infinite';
-
-        setTimeout(tick, timeout);
+        // después de mostrar, esperar y retirar
+        setTimeout(() => {
+            el.classList.remove('subtitle-enter');
+            // mantener visible durante displayDur
+            setTimeout(() => {
+                el.classList.add('subtitle-exit');
+                setTimeout(() => {
+                    idx = (idx + 1) % phrases.length;
+                    showNext();
+                }, exitDur);
+            }, displayDur);
+        }, enterDur);
     }
 
-    // comienza con pequeña demora
-    setTimeout(tick, 600);
+    // iniciar con pequeña demora
+    setTimeout(showNext, 400);
 });
 
 // Funcionalidad para formulario avanzado
