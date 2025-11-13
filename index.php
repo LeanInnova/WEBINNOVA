@@ -24,14 +24,14 @@
   </head>
   <body>
     <nav id="menu">
-      <a target="_blank" href="https://donweb.com">
+      <a target="_blank" rel="noopener noreferrer" href="https://donweb.com">
         <img
           class="logo"
           src="imgs/hosting-vacio-header-donweb.png"
           alt="logo-donweb"
         />
       </a>
-      <a target="_blank" href="#" class="btn-micuenta btn-principal"
+      <a target="_blank" rel="noopener noreferrer" href="#" class="btn-micuenta btn-principal"
         >Mi Cuenta</a
       >
     </nav>
