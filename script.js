@@ -332,7 +332,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Efecto carrusel moderno (loop) para subtítulo del logo
 document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById('typing-text');
-    if (!el) return;
+    const wrapper = document.querySelector('.logo-subtitle');
+    if (!el || !wrapper) return;
+    // asegurar clase que nuestras reglas CSS esperan
+    wrapper.classList.add('subtitle-reveal');
 
     // Soportamos múltiples frases por si queremos ampliar el carrusel
     const phrases = [
@@ -347,19 +350,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function showNext() {
         const phrase = phrases[idx];
 
-        // insertar estructura necesaria para reveal
-        el.innerHTML = `<span class="reveal-text">${phrase}</span>`;
-        el.classList.remove('reveal-exit');
+        // insertar estructura necesaria para reveal dentro del contenedor
+        wrapper.innerHTML = `<span class="reveal-text">${phrase}</span>`;
+        wrapper.classList.remove('reveal-exit');
         // forzar reflow
-        void el.offsetWidth;
+        void wrapper.offsetWidth;
         // activar la animación de reveal (scaleX)
-        el.classList.add('reveal-active');
+        wrapper.classList.add('reveal-active');
 
         // después de la entrada, esperar displayDur, luego ejecutar salida
         setTimeout(() => {
             // iniciar salida
-            el.classList.remove('reveal-active');
-            el.classList.add('reveal-exit');
+            wrapper.classList.remove('reveal-active');
+            wrapper.classList.add('reveal-exit');
 
             // después de exitDur, avanzar al siguiente
             setTimeout(() => {
