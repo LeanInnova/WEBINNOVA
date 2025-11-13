@@ -185,16 +185,16 @@ body {
     font-size: 1.8rem;
     font-weight: 900;
     color: #2d2d2d;
-    text-shadow: none;
+    text-shadow: 0 2px 8px rgba(45, 45, 45, 0.15);
     letter-spacing: 3px;
     font-family: 'Orbitron', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace;
-    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 20%, #5a5a5a 40%, #4a4a4a 60%, #3a3a3a 80%, #2d2d2d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: transparent;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
     filter: none;
     position: relative;
-    transition: transform 0.3s ease, background 0.5s ease, text-shadow 0.25s ease, color 0.25s ease;
+    transition: transform 0.3s ease, text-shadow 0.25s ease, color 0.25s ease;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
     z-index: 10;
@@ -206,7 +206,7 @@ body {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
     }
 }
 
@@ -224,22 +224,23 @@ body {
 .logo-text.services-style {
     font-family: 'Orbitron', 'Courier New', monospace;
     font-weight: 900;
-    font-size: 1.8rem;
-    background: transparent !important;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #2d2d2d;
-    background-clip: text;
-    text-shadow: none;
+    font-size: 2.2rem;
+    background: transparent;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    color: #1e40af;
+    text-shadow: 0 2px 8px rgba(30, 64, 175, 0.2), 0 0 12px rgba(59, 130, 246, 0.15);
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
-    filter: none;
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.2));
     animation: logoFloat 4s ease-in-out infinite;
-    transition: transform 0.25s ease, filter 0.25s ease;
-    padding: 0 !important;
-    margin: 0 !important;
+    transition: none;
+    padding: 0;
+    margin: 0;
     display: inline-block;
-    color: #2d2d2d !important;
+    cursor: default;
 }
 
 .logo-text.services-style::before {
@@ -318,15 +319,11 @@ body {
 
 .logo-text:hover {
     transform: scale(1.05) translateY(-3px);
-    background: linear-gradient(135deg, #4a4a4a 0%, #5a5a5a 20%, #6a6a6a 40%, #5a5a5a 60%, #4a4a4a 80%, #3a3a3a 100%);
+    background: transparent;
     animation-play-state: paused;
-    filter: brightness(1.2);
+    filter: brightness(1);
 }
 
-.logo-text.services-style:hover {
-    transform: scale(1.01);
-    filter: brightness(1.03);
-}
 
 .logo-text::before {
     content: attr(data-text);
@@ -352,18 +349,6 @@ body {
     pointer-events: none !important;
 }
 
-/* Efecto hover suave para el logo (gradiente desplazable + sombra) */
-.logo-text.services-style {
-    background-size: 200% 200%;
-    background-position: 0% 50%;
-    transition: background-position 0.45s ease, transform 0.25s ease, text-shadow 0.25s ease, filter 0.25s ease;
-}
-.logo-text.services-style:hover {
-    background-position: 100% 50%;
-    transform: translateY(-2px) scale(1.03);
-    text-shadow: 0 8px 28px rgba(37,99,235,0.32);
-    filter: brightness(1.05);
-}
 
 @keyframes glow {
     from {
@@ -393,15 +378,14 @@ body {
     position: relative;
     padding: 0.7rem 1.4rem;
     border-radius: 10px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
     text-transform: uppercase;
     backdrop-filter: blur(15px);
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 0 20px rgba(59, 130, 246, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 0 15px rgba(59, 130, 246, 0.1);
     overflow: hidden;
     font-family: 'Orbitron', sans-serif;
 }
@@ -415,9 +399,9 @@ body {
     height: 100%;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(0, 212, 255, 0.3), 
-        rgba(59, 130, 246, 0.4),
-        rgba(0, 212, 255, 0.3), 
+        rgba(0, 212, 255, 0.4), 
+        rgba(59, 130, 246, 0.5),
+        rgba(0, 212, 255, 0.4), 
         transparent);
     transition: left 0.6s ease;
     z-index: 0;
@@ -429,14 +413,14 @@ body {
 
 .nav-link:hover {
     color: #ffffff;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
-    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%);
+    transform: translateY(-4px) scale(1.08);
     box-shadow: 
-        0 8px 30px rgba(0, 212, 255, 0.4),
-        0 0 40px rgba(59, 130, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        0 0 60px rgba(0, 212, 255, 0.2);
-    border-color: rgba(0, 212, 255, 0.6);
+        0 12px 35px rgba(0, 212, 255, 0.35),
+        0 0 50px rgba(59, 130, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        0 0 80px rgba(0, 212, 255, 0.25);
+    border-color: rgba(0, 212, 255, 0.7);
 }
 
 .nav-link span {
@@ -445,14 +429,15 @@ body {
     display: inline-block;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 .nav-link:hover span {
     text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(0, 212, 255, 0.6),
+        0 0 12px rgba(255, 255, 255, 0.9),
+        0 0 24px rgba(0, 212, 255, 0.7),
         0 2px 8px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
+    transform: scale(1.05) letterSpacing(1px);
 }
 
 .nav-link::after {
