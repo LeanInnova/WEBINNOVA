@@ -15,15 +15,15 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Header con efecto de scroll
+// Header con efecto de scroll - mantiene el fondo azul claro
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-        header.style.boxShadow = '0 4px 25px rgba(0, 0, 0, 0.12)';
+        header.style.background = 'linear-gradient(135deg, rgba(147, 197, 253, 0.98) 0%, rgba(96, 165, 250, 0.95) 50%, rgba(147, 197, 253, 0.98) 100%)';
+        header.style.boxShadow = '0 8px 32px rgba(59, 130, 246, 0.3), 0 4px 16px rgba(0, 0, 0, 0.15)';
     } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+        header.style.background = 'linear-gradient(135deg, rgba(147, 197, 253, 0.98) 0%, rgba(96, 165, 250, 0.95) 50%, rgba(147, 197, 253, 0.98) 100%)';
+        header.style.boxShadow = '0 8px 32px rgba(37, 99, 235, 0.25), 0 4px 16px rgba(0, 0, 0, 0.15)';
     }
 });
 
