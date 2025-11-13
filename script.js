@@ -329,30 +329,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }); 
 
-// Efecto máquina de escribir para subtítulo del logo
+// Efecto máquina de escribir (loop) para subtítulo del logo
 document.addEventListener('DOMContentLoaded', () => {
     const typingEl = document.getElementById('typing-text');
     const cursorEl = document.querySelector('.typing-cursor');
     const text = 'Vos soñalo, nosotros lo hacemos realidad';
-    const speed = 50; // ms por carácter
+    const typeSpeed = 45; // ms por carácter al escribir
+    const deleteSpeed = 30; // ms por carácter al borrar
+    const pauseAfter = 1600; // ms después de escribir antes de borrar
 
-    if (typingEl) {
-        typingEl.textContent = '';
-        let i = 0;
-        function typeChar() {
-            if (i < text.length) {
-                typingEl.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeChar, speed);
-            } else {
-                // Al finalizar, mantener cursor parpadeando
-                if (cursorEl) cursorEl.style.animation = 'blink 1s steps(2) infinite';
-            }
+    if (!typingEl) return;
+
+    let index = 0;
+    let isDeleting = false;
+
+    function tick() {
+        if (!typingEl) return;
+        if (isDeleting) {
+            typingEl.textContent = text.substring(0, index - 1);
+            index--;
+        } else {
+            typingEl.textContent = text.substring(0, index + 1);
+            index++;
         }
 
-        // Pequeña demora antes de comenzar
-        setTimeout(typeChar, 600);
+        // velocidad variable
+        let timeout = isDeleting ? deleteSpeed : typeSpeed;
+
+        if (!isDeleting && index === text.length) {
+            // espera antes de borrar
+            timeout = pauseAfter;
+            isDeleting = true;
+        } else if (isDeleting && index === 0) {
+            // espera antes de volver a escribir
+            isDeleting = false;
+            timeout = 600;
+        }
+
+        // mantener cursor parpadeando
+        if (cursorEl) cursorEl.style.animation = 'blink 1s steps(2) infinite';
+
+        setTimeout(tick, timeout);
     }
+
+    // comienza con pequeña demora
+    setTimeout(tick, 600);
 });
 
 // Funcionalidad para formulario avanzado

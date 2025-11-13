@@ -202,6 +202,7 @@ body {
     animation: logoFloat 4s ease-in-out infinite;
 }
 
+
 /* Contenedor para logo + texto secundario */
 .logo-meta {
     display: flex;
@@ -209,28 +210,52 @@ body {
     align-items: flex-start;
     justify-content: center;
     line-height: 1;
+    position: relative;
 }
 
+/* Subtítulo ubicado cerca de la base de la barra */
 .logo-subtitle {
-    margin-top: 4px;
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.92);
-    font-weight: 500;
-    opacity: 0.95;
+    position: absolute;
+    left: 150px; /* desplaza a la derecha del logo (ajustable) */
+    bottom: 8px; /* cerca de la base de la barra */
+    font-family: 'Orbitron', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
     white-space: nowrap;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(90deg, #60a5fa 0%, #06b6d4 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 18px rgba(59,130,246,0.12);
 }
 
 .typing-cursor {
     display: inline-block;
-    margin-left: 6px;
-    color: rgba(255,255,255,0.9);
+    margin-left: 8px;
+    color: rgba(255,255,255,0.95);
     animation: blink 1s steps(2) infinite;
 }
 
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+}
+
+/* Ajustes responsivos: en pantallas pequeñas el subtítulo queda estático debajo del logo-text */
+@media (max-width: 768px) {
+    .logo-subtitle {
+        position: static;
+        left: auto;
+        bottom: auto;
+        margin-top: 6px;
+        font-size: 1rem;
+        -webkit-text-fill-color: #ffffff;
+        background: none;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
 }
 
 @keyframes logoFloat {
