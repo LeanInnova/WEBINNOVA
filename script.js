@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.classList.add('subtitle-reveal');
     // Modern typing (letter-by-letter) loop
     const phrases = [
-        'Vos soñalo, nosotros lo hacemos realidad'
+        'Vos soñalo, nosotros te lo hacemos realidad'
     ];
 
     const typeSpeed = 75; // ms por carácter (más lento)
