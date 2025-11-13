@@ -329,6 +329,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }); 
 
+// Efecto máquina de escribir para subtítulo del logo
+document.addEventListener('DOMContentLoaded', () => {
+    const typingEl = document.getElementById('typing-text');
+    const cursorEl = document.querySelector('.typing-cursor');
+    const text = 'Vos soñalo, nosotros lo hacemos realidad';
+    const speed = 50; // ms por carácter
+
+    if (typingEl) {
+        typingEl.textContent = '';
+        let i = 0;
+        function typeChar() {
+            if (i < text.length) {
+                typingEl.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeChar, speed);
+            } else {
+                // Al finalizar, mantener cursor parpadeando
+                if (cursorEl) cursorEl.style.animation = 'blink 1s steps(2) infinite';
+            }
+        }
+
+        // Pequeña demora antes de comenzar
+        setTimeout(typeChar, 600);
+    }
+});
+
 // Funcionalidad para formulario avanzado
 document.addEventListener('DOMContentLoaded', () => {
     // Contador de caracteres

@@ -202,6 +202,37 @@ body {
     animation: logoFloat 4s ease-in-out infinite;
 }
 
+/* Contenedor para logo + texto secundario */
+.logo-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1;
+}
+
+.logo-subtitle {
+    margin-top: 4px;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 500;
+    opacity: 0.95;
+    white-space: nowrap;
+}
+
+.typing-cursor {
+    display: inline-block;
+    margin-left: 6px;
+    color: rgba(255,255,255,0.9);
+    animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 @keyframes logoFloat {
     0%, 100% {
         transform: translateY(0px);
