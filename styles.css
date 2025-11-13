@@ -120,25 +120,15 @@ body {
     padding-left: 20px;
     position: relative;
     z-index: 2;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .nav-logo::before {
     content: '';
-    position: absolute;
-    left: -10px;
-    top: -8px;
-    right: -10px;
-    bottom: -8px;
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.08) 0%, rgba(37, 99, 235, 0.1) 50%, rgba(30, 58, 138, 0.08) 100%);
-    border-radius: 12px;
-    border: 2px solid rgba(59, 130, 246, 0.3);
-    box-shadow: 
-        0 0 20px rgba(37, 99, 235, 0.3),
-        0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    z-index: 0;
-    animation: logoFrameGlow 3s ease-in-out infinite alternate;
-    transition: all 0.3s ease;
+    display: none !important;
+    pointer-events: none;
 }
 
 @keyframes logoFrameGlow {
@@ -158,21 +148,8 @@ body {
 
 .nav-logo::after {
     content: '';
-    position: absolute;
-    left: -8px;
-    top: -6px;
-    right: -8px;
-    bottom: -6px;
-    background: linear-gradient(135deg, 
-        transparent 0%, 
-        rgba(0, 212, 255, 0.1) 25%, 
-        rgba(59, 130, 246, 0.15) 50%, 
-        rgba(0, 212, 255, 0.1) 75%, 
-        transparent 100%);
-    border-radius: 10px;
-    z-index: -2;
-    opacity: 0.6;
-    animation: logoFramePulse 4s ease-in-out infinite;
+    display: none !important;
+    pointer-events: none;
 }
 
 @keyframes logoFramePulse {
@@ -187,11 +164,7 @@ body {
 }
 
 .nav-logo:hover::before {
-    box-shadow: 
-        0 0 40px rgba(37, 99, 235, 0.6),
-        0 6px 30px rgba(0, 0, 0, 0.2);
-    border-color: rgba(0, 212, 255, 0.6);
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(37, 99, 235, 0.07) 50%, rgba(30, 58, 138, 0.05) 100%);
+    display: none !important;
 }
 
 .logo {
@@ -221,7 +194,7 @@ body {
     background-clip: text;
     filter: none;
     position: relative;
-    transition: transform 0.3s ease, background 0.5s ease;
+    transition: transform 0.3s ease, background 0.5s ease, text-shadow 0.25s ease, color 0.25s ease;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
     z-index: 10;
@@ -237,14 +210,24 @@ body {
     }
 }
 
+/* Ocultar completamente pseudo-elementos problemáticos del logo */
+.logo-text::before,
+.logo-text.services-style::before,
+.logo-text.services-style::after {
+    display: none !important;
+    visibility: hidden !important;
+    content: none !important;
+    pointer-events: none !important;
+}
+
 /* Estilo especial para el logo con el mismo diseño que servicios */
 .logo-text.services-style {
     font-family: 'Orbitron', 'Courier New', monospace;
     font-weight: 900;
     font-size: 1.8rem;
-    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 15%, #5a5a5a 30%, #6a6a6a 50%, #5a5a5a 70%, #4a4a4a 85%, #3a3a3a 100%);
+    background: transparent !important;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #2d2d2d;
     background-clip: text;
     text-shadow: none;
     letter-spacing: 3px;
@@ -252,6 +235,11 @@ body {
     position: relative;
     filter: none;
     animation: logoFloat 4s ease-in-out infinite;
+    transition: transform 0.25s ease, filter 0.25s ease;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-block;
+    color: #2d2d2d !important;
 }
 
 .logo-text.services-style::before {
@@ -263,8 +251,9 @@ body {
     bottom: -5px;
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%);
     border-radius: 10px;
-    z-index: -1;
+    z-index: -2;
     filter: blur(15px);
+    pointer-events: none;
     animation: logoBackground 4s ease-in-out infinite alternate;
 }
 
@@ -278,7 +267,8 @@ body {
     height: 110%;
     background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
     border-radius: 50%;
-    z-index: -2;
+    z-index: -3;
+    pointer-events: none;
     animation: logoPulse 2s ease-in-out infinite;
 }
 
@@ -334,10 +324,8 @@ body {
 }
 
 .logo-text.services-style:hover {
-    transform: scale(1.08) translateY(-3px);
-    background: linear-gradient(135deg, #4a4a4a 0%, #5a5a5a 15%, #6a6a6a 30%, #7a7a7a 50%, #6a6a6a 70%, #5a5a5a 85%, #4a4a4a 100%);
-    animation-play-state: paused;
-    filter: brightness(1.2);
+    transform: scale(1.01);
+    filter: brightness(1.03);
 }
 
 .logo-text::before {
@@ -354,6 +342,27 @@ body {
     z-index: -1;
     animation: glow 2s ease-in-out infinite alternate;
     pointer-events: none;
+}
+
+/* Evitar que pseudo-elementos generen fondos que tapen el título */
+.logo-text::before,
+.logo-text.services-style::before,
+.logo-text.services-style::after {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+/* Efecto hover suave para el logo (gradiente desplazable + sombra) */
+.logo-text.services-style {
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    transition: background-position 0.45s ease, transform 0.25s ease, text-shadow 0.25s ease, filter 0.25s ease;
+}
+.logo-text.services-style:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px) scale(1.03);
+    text-shadow: 0 8px 28px rgba(37,99,235,0.32);
+    filter: brightness(1.05);
 }
 
 @keyframes glow {
